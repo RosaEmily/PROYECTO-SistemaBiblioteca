@@ -1,0 +1,36 @@
+@page
+{
+    margin: 1cm 2cm;
+}
+header
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 3cm;
+}
+body
+{
+    margin-top: 4cm;
+}
+.titulo
+{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 1cm;
+}
+.img_cabecera
+{
+    height: 2.2cm;
+    padding: 30px 0px;
+    opacity: 0.7;
+}
+.text_cabecera
+{
+    padding: 20px 80px;
+    opacity: 0.7;
+}
