@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Prestamista;
 use App\Prestamo;
 use App\Publicacion;
@@ -27,12 +27,20 @@ class PrestamoController extends Controller
     }
     public function store(Request $request)
     {
-        Prestamo::create($request->all());
-        return redirect()->route('prestamo.index');
+        try
+        {
+            Prestamo::create($request->all());
+        }
+        catch(\Exception $e)
+        {
+            dd($e);
+            DB::rollback();
+        }
+        return redirect()->route('prestamo.index'); 
     }
     public function show($id)
     {
-        $prestamo=Prestamo::join('prestamistas','prestamistas.idprestamista','=','prestamos.idprestamo')
+        $prestamo=Prestamo::join('prestamistas','prestamistas.idprestamista','=','prestamos.idprestamista')
         ->join('publicaciones','publicaciones.idpublicacion','=','prestamos.idpublicacion')
         ->select('prestamos.idprestamo','prestamos.fechadeprestamo','prestamos.fechadedevolucion',
         'prestamos.idprestamista',Prestamo::raw('concat(prestamistas.nombres," ",prestamistas.apellidos) as prestamista'),
